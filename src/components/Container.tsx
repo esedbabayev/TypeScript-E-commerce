@@ -1,7 +1,12 @@
-import React from "react";
+import React from 'react';
 
-const Container: React.FC = () => {
-  return <div className="container mx-auto"></div>;
+interface AuxProps {
+  children: JSX.Element[];
+}
+const Container: React.FC<AuxProps> = ({ children }) => {
+  return <div className="w-full max-w-[1440px] mx-auto">
+    {children}
+  </div>;
 };
 
 export default Container;
