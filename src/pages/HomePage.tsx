@@ -5,6 +5,7 @@ import HeroSection from '../components/Home/HeroSection.tsx'
 import FeaturesSection from '../components/Home/FeaturesSection.tsx'
 import BestSellingSection from '../components/Home/BestSellingSection.tsx'
 import BrowseSection from '../components/Home/BrowseSection.tsx'
+import FeaturedAndLatestSection from '../components/Home/FeaturedAndLatestSection.tsx'
 
 const HomePage: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage: React.FC = () => {
       <FeaturesSection />
       <BestSellingSection />
       <BrowseSection />
+      <FeaturedAndLatestSection />
     </main>
   )
 }
