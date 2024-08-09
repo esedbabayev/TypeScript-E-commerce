@@ -4,7 +4,7 @@ interface AuxProps {
   children: JSX.Element[];
 }
 const Container: React.FC<AuxProps> = ({ children }) => {
-  return <div className="w-full max-w-[1440px] mx-auto">
+  return <div className="container mx-auto">
     {children}
   </div>;
 };

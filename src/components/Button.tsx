@@ -1,13 +1,15 @@
 import React from "react";
 
-type String = {
-  children: string;
+type ButtonProps = {
+  children: React.ReactNode;
 };
 
-const Button: React.FC<String> = ({ children }) => {
+const Button: React.FC<ButtonProps> = ({ children }) => {
   return (
     <div>
-      <button className="flex gap-2 px-6 py-4 bg-black text-white">{children}</button>
+      <button className="flex gap-3 px-6 py-4 bg-black text-white rounded-md border-2 border-transparent transition-all duration-200 hover:bg-[#F6F6F6] hover:text-black hover:border-black">
+        {children}
+      </button>
     </div>
   );
 };
