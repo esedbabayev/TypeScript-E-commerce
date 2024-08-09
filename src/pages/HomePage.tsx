@@ -1,10 +1,13 @@
 import React from 'react'
 
+// Components
+import HeroSection from '../components/Home/HeroSection.tsx'
+
 const HomePage: React.FC = () => {
   return (
-    <div>
-      
-    </div>
+    <main className='w-full'>
+      <HeroSection />
+    </main>
   )
 }
 

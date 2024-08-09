@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 const NavBar: React.FC = () => {
   return (
-    <nav className='w-[60%] flex items-center justify-center gap-20'>
+    <nav className='flex items-center justify-center gap-20'>
       <ul className='flex gap-8'>
         <Link to="/">
           <li className='text-sm font-medium text-[#5C5F6A]'>Home</li>

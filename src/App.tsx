@@ -13,7 +13,8 @@ import HomePage from "./pages/HomePage.tsx";
 import ProductsPage from "./pages/ProductsPage.tsx";
 import ProductPage from "./pages/ProductPage.tsx";
 import SignInPage from "./pages/SignInPage.tsx";
-import SignUpPage from "./pages/SignUpPage.tsx"
+import SignUpPage from "./pages/SignUpPage.tsx";
+import CartPage from "./pages/CartPage.tsx";
 
 const App: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const App: React.FC = () => {
           <Route index element={<HomePage />} />
           <Route path="products" element={<ProductsPage />} />
           <Route path="products:id" element={<ProductPage />} />
+          <Route path="cart" element={<CartPage />} />
           <Route path="sign-in" element={<SignInPage />} />
           <Route path="sign-up" element={<SignUpPage />} />
         </Route>
