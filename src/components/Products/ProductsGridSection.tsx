@@ -1,9 +1,13 @@
 import React from "react";
 
 // Components
+import ProductItem from "../ProductItem.tsx";
+import PaginationElement from "./PaginationElement.tsx";
 
 // Icons
 import ChevronDown from "../../icons/ChevronDown.tsx";
+import ChevronLeft from "../../icons/ChevronLeft.tsx";
+import ChevronRight from "../../icons/ChevronRight.tsx";
 
 const ProductsGridSection: React.FC = () => {
   return (
@@ -28,7 +32,9 @@ const ProductsGridSection: React.FC = () => {
       {/* showing results */}
       <div className="w-full flex justify-between">
         <div>
-          <span className="text-[#5C5F6A] font-medium">Showing 1-9 of 36 results.</span>
+          <span className="text-[#5C5F6A] font-medium">
+            Showing 1-9 of 36 results.
+          </span>
         </div>
         <div className="flex gap-3 items-center cursor-pointer">
           <span className="uppercase">Sort by</span>
@@ -38,9 +44,35 @@ const ProductsGridSection: React.FC = () => {
         </div>
       </div>
       {/* proucts */}
-      <div></div>
+      <div className="grid grid-cols-3 gap-8">
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
+      </div>
       {/* pagination */}
-      <div></div>
+      <div className="w-full flex justify-center mt-8">
+        <div className="w-1/3 flex items-center gap-4 px-6 py-4 border rounded">
+          <div className="cursor-pointer">
+            <ChevronLeft />
+          </div>
+          <PaginationElement />
+          <PaginationElement />
+          <div className="px-4 py-1 rounded-md">
+            <span>...</span>
+          </div>
+          <PaginationElement />
+          <PaginationElement />
+          <div className="cursor-pointer">
+            <ChevronRight />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
