@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
+
+// Components
+import EcommerceTopSection from "../components/Product/EcommerceTopSection.tsx"; 
 
 const ProductPage: React.FC = () => {
   return (
-    <div>
+    <main>
+      <EcommerceTopSection />
+    </main>
+  );
+};
 
-    </div>
-  )
-}
-
-export default ProductPage
+export default ProductPage;
