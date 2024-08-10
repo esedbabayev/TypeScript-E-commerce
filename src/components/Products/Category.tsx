@@ -6,7 +6,7 @@ const Category: React.FC = () => {
       <div>
         <input
           type="checkbox"
-          className="w-3 h-3 text-black border-gray-300 rounded focus:ring-black checked:bg-black checked:text-black"
+          className="w-3 h-3 text-black border-gray-300 rounded cursor-pointer"
         />
       </div>
       <div>
