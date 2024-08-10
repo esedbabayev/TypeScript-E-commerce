@@ -4,7 +4,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 // Images
-import BlackTshirt from "../../images/image.png"
+import BlackTshirt from "../images/image.png"
 
 const ProductItem: React.FC = () => {
   return (
