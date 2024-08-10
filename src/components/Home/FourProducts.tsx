@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Components
-import ProductItem from './ProductItem.tsx'
+import ProductItem from '../ProductItem.tsx'
 
 const FourProducts: React.FC = () => {
   return (
