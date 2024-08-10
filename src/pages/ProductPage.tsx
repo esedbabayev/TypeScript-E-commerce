@@ -4,6 +4,8 @@ import React from "react";
 import EcommerceTopSection from "../components/Product/EcommerceTopSection.tsx";
 import ProductSection from "../components/Product/ProductSection.tsx";
 import DetailsAndReviewsSection from "../components/Product/DetailsAndReviewsSection.tsx";
+import SimilarProductsSection from "../components/Product/SimilarProductsSection.tsx";
+import NewsLetterSection from "../components/NewsLetterSection.tsx";
 
 const ProductPage: React.FC = () => {
   return (
@@ -11,6 +13,8 @@ const ProductPage: React.FC = () => {
       <EcommerceTopSection />
       <ProductSection />
       <DetailsAndReviewsSection />
+      <SimilarProductsSection />
+      <NewsLetterSection />
     </main>
   );
 };
