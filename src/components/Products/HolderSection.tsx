@@ -7,7 +7,7 @@ import ProductsGridSection from "./ProductsGridSection.tsx";
 
 const HolderSection: React.FC = () => {
   return (
-    <section>
+    <section className="mt-14">
       <Container>
         <div className="flex gap-7">
           <LeftSidebarSection />
