@@ -1,11 +1,16 @@
-import React from 'react'
+import React from "react";
+
+// Components
+import TopEcommerceSection from "../components/TopEcommerceSection.tsx";
+import CartAndSummarySection from "../components/Cart/CartAndSummarySection.tsx"
 
 const CartPage: React.FC = () => {
   return (
-    <div>
+    <main>
+      <TopEcommerceSection nameOfPage="Cart" search="Cart" />
+      <CartAndSummarySection />
+    </main>
+  );
+};
 
-    </div>
-  )
-}
-
-export default CartPage
+export default CartPage;
