@@ -8,7 +8,7 @@ import Button from "../Button.tsx";
 
 const OrderSummary: React.FC = () => {
   return (
-    <div className="w-3/12 px-6 py-8 border border-[#E6E7E8] rounded-lg">
+    <div className="w-3/12 h-[25rem] px-6 py-8 border border-[#E6E7E8] rounded-lg">
       {/* text */}
       <div>
         <span className="font-semibold text-base text-[#0E1422]">
