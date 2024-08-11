@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import Container from "../Container.tsx";
 import Google from "../Google.tsx";
 import Form from "../Form.tsx";
+import InputField from "../InputField.tsx";
 
 const SignInSection: React.FC = () => {
   return (
@@ -15,7 +16,10 @@ const SignInSection: React.FC = () => {
         <div className="w-full justify-center items-center flex flex-col gap-10">
           <Google />
           <div className="w-full flex flex-col items-center justify-center gap-6">
-            <Form />
+            <Form
+              inputElementEmail={<InputField label="email" />}
+              inputElementPassword={<InputField label="password" />}
+            />
             <div className="flex justify-end w-1/5">
               <span className="text-xs font-medium text-[#474B57] cursor-pointer hover:underline">
                 Forgot Password?
