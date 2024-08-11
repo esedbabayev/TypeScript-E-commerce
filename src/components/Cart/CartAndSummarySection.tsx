@@ -7,7 +7,7 @@ import OrderSummary from "./OrderSummary.tsx";
 
 const CartAndSummarySection: React.FC = () => {
   return (
-    <section className="mt-20">
+    <section className="mt-20 mb-52">
       <Container>
         <div className="w-full flex justify-between">
           <Cart />
