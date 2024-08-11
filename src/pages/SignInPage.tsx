@@ -1,11 +1,16 @@
-import React from 'react'
+import React from "react";
+
+// Components
+import TopEcommerceSection from "../components/TopEcommerceSection.tsx";
+import SignInSection from "../components/SignIn/SignInSection.tsx";
 
 const SignInPage: React.FC = () => {
   return (
-    <div>
-      ssdsd
-    </div>
-  )
-}
+    <main>
+      <TopEcommerceSection nameOfPage="Cart" search="Cart" />
+      <SignInSection />
+    </main>
+  );
+};
 
-export default SignInPage
+export default SignInPage;
