@@ -7,7 +7,7 @@ import SignInSection from "../components/SignIn/SignInSection.tsx";
 const SignInPage: React.FC = () => {
   return (
     <main>
-      <TopEcommerceSection nameOfPage="Cart" search="Cart" />
+      <TopEcommerceSection nameOfPage="Login" search="Login" />
       <SignInSection />
     </main>
   );
