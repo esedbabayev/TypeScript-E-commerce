@@ -1,11 +1,52 @@
-import React from 'react'
+import React from "react";
 
-const OrderSummary:React.FC = () => {
+// Link
+import { Link } from "react-router-dom";
+
+// Components
+import Button from "../Button.tsx";
+
+const OrderSummary: React.FC = () => {
   return (
-    <div>
-      
+    <div className="w-3/12 px-6 py-8 border border-[#E6E7E8] rounded-lg">
+      {/* text */}
+      <div>
+        <span className="font-semibold text-base text-[#0E1422]">
+          Order Summary
+        </span>
+      </div>
+      {/* summary */}
+      <div className="py-6 flex flex-col gap-4">
+        <div className="flex justify-between">
+          <span className="text-sm font-medium text-[#5C5F6A]">Subtotal</span>
+          <span className="text-sm font-medium text-[#0E1422]">$ 90.00</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-sm font-medium text-[#5C5F6A]">Shipping</span>
+          <span className="text-sm font-medium text-[#0E1422]">FREE</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-sm font-medium text-[#5C5F6A]">Tax</span>
+          <span className="text-sm font-medium text-[#0E1422]">$ 3.00</span>
+        </div>
+        <div className="flex justify-between pt-4 border-t border-[#E6E7E8]">
+          <span className="text-sm font-medium text-[#5C5F6A]">Total</span>
+          <span className="text-sm font-medium text-[#0E1422]">$ 100.00</span>
+        </div>
+      </div>
+      {/* button */}
+      <div className="flex flex-col items-center justify-center gap-10">
+        <button className="w-full flex justify-center gap-3 px-6 py-4 bg-black text-white rounded-md border-2 border-transparent transition-all duration-200 hover:bg-[#F6F6F6] hover:text-black hover:border-black">
+          Checkout
+        </button>
+        <Link to="/products">
+          <span className="cursor-pointer underline text-xs font-medium text-[#0E1422]">
+            Continue Shopping
+          </span>
+        </Link>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default OrderSummary
+export default OrderSummary;
