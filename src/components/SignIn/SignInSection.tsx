@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 // Link
 import { Link } from "react-router-dom";
@@ -10,6 +10,9 @@ import Form from "../Form.tsx";
 import InputField from "../InputField.tsx";
 
 const SignInSection: React.FC = () => {
+  const userNameRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
+
   return (
     <section className="mt-20 mb-40">
       <Container>
@@ -17,8 +20,8 @@ const SignInSection: React.FC = () => {
           <Google />
           <div className="w-full flex flex-col items-center justify-center gap-6">
             <Form
-              inputElementEmail={<InputField label="email" />}
-              inputElementPassword={<InputField label="password" />}
+              inputElementEmail={<InputField label="username" ref={userNameRef} />}
+              inputElementPassword={<InputField label="password" ref={passwordRef} />}
             />
             <div className="flex justify-end w-1/5">
               <span className="text-xs font-medium text-[#474B57] cursor-pointer hover:underline">
