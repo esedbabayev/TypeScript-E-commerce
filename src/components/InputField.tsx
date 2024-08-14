@@ -1,17 +1,27 @@
-import React from "react";
+import React, { LegacyRef } from "react";
 
-type LabelType = {
+// Hooks
+
+type PropsType = {
   label: string;
+  ref: LegacyRef<HTMLInputElement>;
 };
 
-const InputField: React.FC<LabelType> = ({ label }) => {
+const InputField: React.FC<PropsType> = ({ label, ref }) => {
   return (
     <div>
-      <label className="capitalize font-medium text-sm text-[#474B57]" htmlFor="">
+      <label
+        className="capitalize font-medium text-sm text-[#474B57]"
+        htmlFor=""
+      >
         {label}
       </label>
       <div className="w-full border rounded-md overflow-hidden">
-        <input className="w-full outline-none px-3 py-2" type={label} />
+        <input
+          ref={ref}
+          className="w-full outline-none px-3 py-2"
+          type={label}
+        />
       </div>
     </div>
   );
