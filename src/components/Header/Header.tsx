@@ -17,6 +17,14 @@ import Cart from "../../icons/Cart.tsx";
 import Profile from "../../icons/Profile.tsx";
 
 const Header: React.FC = () => {
+  const userId = localStorage.getItem("userId");
+
+  const logOut = (): void => {
+    if (userId) {
+      localStorage.removeItem("userId");
+    }
+  };
+
   return (
     <header className="w-full py-5 px-12">
       <Container>
@@ -46,9 +54,15 @@ const Header: React.FC = () => {
                 <Link to="/cart">
                   <Cart />
                 </Link>
-                <Link to="/sign-in">
-                  <Profile />
-                </Link>
+                {userId ? (
+                  <Link onClick={logOut} to="/sign-in">
+                    <Profile />
+                  </Link>
+                ) : (
+                  <Link to="/sign-in">
+                    <Profile />
+                  </Link>
+                )}
               </div>
             </div>
           </div>
