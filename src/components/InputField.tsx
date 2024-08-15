@@ -1,18 +1,16 @@
-import React, { LegacyRef } from "react";
+import React, { forwardRef } from "react";
 
-// Hooks
-
+// Type definitions
 type PropsType = {
   label: string;
-  ref: LegacyRef<HTMLInputElement>;
 };
 
-const InputField: React.FC<PropsType> = ({ label, ref }) => {
+const InputField = forwardRef<HTMLInputElement, PropsType>(({ label }, ref) => {
   return (
     <div>
       <label
         className="capitalize font-medium text-sm text-[#474B57]"
-        htmlFor=""
+        htmlFor={label}
       >
         {label}
       </label>
@@ -21,10 +19,11 @@ const InputField: React.FC<PropsType> = ({ label, ref }) => {
           ref={ref}
           className="w-full outline-none px-3 py-2"
           type={label}
+          id={label}
         />
       </div>
     </div>
   );
-};
+});
 
 export default InputField;
