@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
-// Link
-import { Link } from "react-router-dom";
+// Link and useNavigate
+import { Link, useNavigate } from "react-router-dom";
 
 // Components
 import Container from "../Container.tsx";
@@ -10,8 +10,45 @@ import Form from "../Form.tsx";
 import InputField from "../InputField.tsx";
 
 const SignInSection: React.FC = () => {
-  const userNameRef = useRef<HTMLInputElement>(null)
-  const passwordRef = useRef<HTMLInputElement>(null)
+  const navigate = useNavigate();
+
+  const userNameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const signInHandler = async () => {
+    const userName = userNameRef.current?.value.trim();
+    const password = passwordRef.current?.value.trim();
+
+    if (!userName || !password) {
+      alert("Please fill all the fields");
+      return;
+    }
+
+    const response = await fetch(
+      `http://localhost:3000/users?userName=${userName}`
+    );
+
+    const data = await response.json();
+
+    const existingUser = data[0];
+
+    if (!existingUser) {
+      alert("Wrong username or password");
+      return;
+    }
+
+    if (password !== existingUser?.password) {
+      alert("Wrong username or password");
+      return;
+    }
+
+    userNameRef.current!.value = "";
+    passwordRef.current!.value = "";
+
+    localStorage.setItem("userId", JSON.stringify(existingUser?.id));
+
+    navigate("/");
+  };
 
   return (
     <section className="mt-20 mb-40">
@@ -20,8 +57,12 @@ const SignInSection: React.FC = () => {
           <Google />
           <div className="w-full flex flex-col items-center justify-center gap-6">
             <Form
-              inputElementEmail={<InputField label="username" ref={userNameRef} />}
-              inputElementPassword={<InputField label="password" ref={passwordRef} />}
+              inputElementEmail={
+                <InputField label="username" ref={userNameRef} />
+              }
+              inputElementPassword={
+                <InputField label="password" ref={passwordRef} />
+              }
             />
             <div className="flex justify-end w-1/5">
               <span className="text-xs font-medium text-[#474B57] cursor-pointer hover:underline">
@@ -29,7 +70,10 @@ const SignInSection: React.FC = () => {
               </span>
             </div>
             <div className="w-1/5">
-              <button className="w-full flex gap-3 items-center justify-center px-6 py-2 bg-black text-white rounded-md border-2 border-transparent transition-all duration-200 hover:bg-[#F6F6F6] hover:text-black hover:border-black">
+              <button
+                onClick={signInHandler}
+                className="w-full flex gap-3 items-center justify-center px-6 py-2 bg-black text-white rounded-md border-2 border-transparent transition-all duration-200 hover:bg-[#F6F6F6] hover:text-black hover:border-black"
+              >
                 Login
               </button>
             </div>
