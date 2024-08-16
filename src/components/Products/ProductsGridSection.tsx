@@ -86,7 +86,7 @@ const ProductsGridSection: React.FC = () => {
       {/* proucts */}
       <div className="grid grid-cols-3 gap-8">
         {productData
-          .map((product) => <ProductItem key={product.id} {...product} />)
+          .map((product) => <ProductItem key={product.id} product={product} />)
           .slice(0, 9)}
       </div>
       {/* pagination */}
