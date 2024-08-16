@@ -4,7 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // Images
-import BlackTshirt from "../images/image.png";
+// import BlackTshirt from "../images/image.png";
 
 type ProductType = {
   id: string;
@@ -24,8 +24,8 @@ const ProductItem: React.FC<PropsType> = ({ product }) => {
       <Link to="/product/id">
         <div className="flex flex-col gap-6">
           {/* img */}
-          <div>
-            <img src={product?.image} alt="Product" />
+          <div className="bg-[#F6F6F6]">
+            <img src={product?.image} alt="Product" className="w-full aspect-square"/>
           </div>
           {/* name */}
           <div>
@@ -39,7 +39,7 @@ const ProductItem: React.FC<PropsType> = ({ product }) => {
           <p>IN STOCK</p>
         </div>
         <div>
-          <p className="font-normal text-[#474B57]">$35.00</p>
+          <p className="font-normal text-[#474B57]">${product?.price.toFixed(2)}</p>
         </div>
       </div>
     </div>
