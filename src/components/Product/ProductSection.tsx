@@ -10,15 +10,23 @@ import ProductImage from "./ProductImage.tsx";
 import ProductInfo from "./ProductInfo.tsx";
 import ProductsGridSection from "../Products/ProductsGridSection";
 
-const ProductSection: React.FC = () => {
-  const { id } = useParams();
+type ProductType = {
+  id: string;
+  image: string;
+  name: string;
+  price: number;
+};
 
-  const [productData, setProductData] = useState();
+const ProductSection: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+
+  const [productData, setProductData] = useState<ProductType | null>(null);
 
   const getProductById = async () => {
-    const response = await fetch(`http:localhost:3000/users?id=${id}`);
+    const response = await fetch(`http://localhost:3000/products/${id}`);
     const data = await response.json();
     setProductData(data);
+    console.log(data);
   };
 
   useEffect(() => {
@@ -29,12 +37,9 @@ const ProductSection: React.FC = () => {
     <section className="mt-4">
       <Container>
         <div className="w-full flex gap-8">
-          {
-            productData.map(() => (
-              <ProductImage image={}/>
-            ))
-          }
-          <ProductInfo />
+            <ProductImage image={productData?.image} />
+
+          <ProductInfo name={productData?.name} price={productData?.price}/>
         </div>
       </Container>
     </section>
