@@ -21,7 +21,7 @@ const ProductItem: React.FC<PropsType> = ({ product }) => {
   return (
     <div className="flex flex-col gap-3">
       {/* Product Image and Name */}
-      <Link to="/product/id">
+      <Link to={`/products/${product?.id}`}>
         <div className="flex flex-col gap-6">
           {/* img */}
           <div className="bg-[#F6F6F6]">
