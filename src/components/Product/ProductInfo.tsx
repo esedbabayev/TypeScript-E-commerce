@@ -11,13 +11,18 @@ import Minus from "../../icons/Minus.tsx";
 import Plus from "../../icons/Plus.tsx";
 import Heart from "../../icons/Heart.tsx";
 
-const ProductInfo: React.FC = () => {
+type PropsType = {
+  name: string;
+  price: number;
+};
+
+const ProductInfo: React.FC<PropsType> = ({ name, price }) => {
   return (
     <div className="w-1/2 flex flex-col gap-6">
       {/* name and share */}
       <div className="w-full">
         <div className="flex justify-between">
-          <h3 className="font-bold text-3xl">Raw Black T-Shirt Lineup</h3>
+          <h3 className="font-bold text-3xl">{name}</h3>
           <div className="cursor-pointer">
             <Share />
           </div>
@@ -37,7 +42,7 @@ const ProductInfo: React.FC = () => {
       </div>
       {/* price */}
       <div>
-        <p className="font-bold text-lg">$75.00</p>
+        <p className="font-bold text-lg">${price?.toFixed(2)}</p>
       </div>
       {/* colors */}
       <div className="flex flex-col gap-2 w-1/3">
@@ -91,7 +96,9 @@ const ProductInfo: React.FC = () => {
       </div>
       {/* $100 */}
       <div>
-        <p className="font-medium text-sm text-[#5C5F6A]">— Free shipping on orders $100+</p>
+        <p className="font-medium text-sm text-[#5C5F6A]">
+          — Free shipping on orders $100+
+        </p>
       </div>
     </div>
   );
