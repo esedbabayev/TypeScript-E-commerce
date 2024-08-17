@@ -3,9 +3,6 @@ import React from "react";
 // Link
 import { Link } from "react-router-dom";
 
-// Images
-// import BlackTshirt from "../images/image.png";
-
 interface ProductItemProps {
   product: {
     id: number;
