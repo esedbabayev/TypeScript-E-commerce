@@ -1,4 +1,7 @@
+// React & Hooks
 import React, { useState, useEffect } from "react";
+
+// Components
 import Container from "../Container.tsx";
 import LeftSidebarSection from "./LeftSidebarSection.tsx";
 import ProductsGridSection from "./ProductsGridSection.tsx";
@@ -16,11 +19,10 @@ const HolderSection: React.FC = () => {
     const response = await fetch("http://localhost:3000/products");
     const data = await response.json();
 
-    // Assume the API returns an object that includes categories, colors, and sizes
     const extractedFilters: FilterType = {
       category: [...new Set(data.map((item: any) => item.category))],
       colors: [...new Set(data.map((item: any) => item.color))],
-      sizes: [...new Set(data.map((item: any) => item.size))], 
+      sizes: [...new Set(data.map((item: any) => item.size))],
     };
 
     setFilters(extractedFilters);
