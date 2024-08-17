@@ -26,7 +26,6 @@ const ProductSection: React.FC = () => {
     const response = await fetch(`http://localhost:3000/products/${id}`);
     const data = await response.json();
     setProductData(data);
-    console.log(data);
   };
 
   useEffect(() => {
