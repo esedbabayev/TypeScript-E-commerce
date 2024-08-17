@@ -2,6 +2,7 @@ import React from "react";
 
 // Hooks
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 // Components
 import ProductItem from "../ProductItem.tsx";
@@ -17,10 +18,14 @@ interface ProductType {
   name: string;
   price: number;
   image: string;
+  category: string;
+  color: string;
+  size: string;
 }
 
 const ProductsGridSection: React.FC = () => {
   const [productData, setProductData] = useState<ProductType[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);
 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -31,6 +36,7 @@ const ProductsGridSection: React.FC = () => {
       const data = await response.json();
 
       setProductData(data);
+      setFilteredProducts(data);
     } catch (err) {
       setError("Failed to fetch products");
     } finally {
@@ -38,9 +44,45 @@ const ProductsGridSection: React.FC = () => {
     }
   };
 
+  const selectedCategories = useSelector(
+    (state) => state.categories.selectedCategories
+  );
+
+  const selectedColors = useSelector((state) => state.colors.selectedColors);
+
+  const selectedSizes = useSelector((state) => state.sizes.selectedSizes);
+
+  const filterProducts = () => {
+    let products = productData;
+
+    if (selectedCategories?.length > 0) {
+      products = products?.filter((product) => {
+        return selectedCategories?.includes(product?.category);
+      });
+    }
+
+    if (selectedColors?.length > 0) {
+      products = products?.filter((product) => {
+        return selectedColors?.includes(product?.color);
+      });
+    }
+
+    if (selectedSizes?.length > 0) {
+      products = products?.filter((product) => {
+        return selectedSizes.includes(product?.size);
+      });
+    }
+
+    setFilteredProducts(products);
+  };
+
   useEffect(() => {
     getProducts();
   }, []);
+
+  useEffect(() => {
+    filterProducts();
+  }, [selectedCategories, selectedColors, selectedSizes]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -73,7 +115,12 @@ const ProductsGridSection: React.FC = () => {
       <div className="w-full flex justify-between">
         <div>
           <span className="text-[#5C5F6A] font-medium">
-            Showing 1-9 of {productData.length} results.
+            Showing 1-
+            {filteredProducts.length > 9
+              ? "9"
+              : filteredProducts.length} of{" "}
+            {filteredProducts.length > 9 ? "9" : filteredProducts.length}{" "}
+            results.
           </span>
         </div>
         <div className="flex gap-3 items-center cursor-pointer">
@@ -85,9 +132,12 @@ const ProductsGridSection: React.FC = () => {
       </div>
       {/* proucts */}
       <div className="grid grid-cols-3 gap-8">
-        {productData
-          .map((product) => <ProductItem key={product.id} product={product} />)
-          .slice(0, 9)}
+        {filteredProducts.length &&
+          filteredProducts
+            .map((product) => (
+              <ProductItem key={product?.id} product={product} />
+            ))
+            .slice(0, 9)}
       </div>
       {/* pagination */}
       <div className="w-full flex justify-center mt-8">
