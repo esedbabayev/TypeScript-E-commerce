@@ -1,18 +1,45 @@
 import React from "react";
 
+// Hooks
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+// Actions
+import { selectSizes } from "../../Slices/sizes.slice";
+
 interface SizeProps {
   size: string;
 }
 
 const Size: React.FC<SizeProps> = ({ size }) => {
-  return (
-    // <div className='flex justify-center items-center p-4 py-2 border rounded border-[#0E1422] cursor-pointer'>
-    //   <p className='font-medium text-xs text-[#0E1422]'>{size}</p>
-    // </div>
+  const [selected, setSelected] = useState(false);
 
-    <div className="flex justify-center items-center p-4 py-2 border rounded border-[#E6E7E8] cursor-pointer">
-      <p className="font-medium text-xs text-[#0E1422]">{size}</p>
-    </div>
+  const dispatch = useDispatch();
+
+  const select = () => {
+    setSelected(!selected);
+
+    dispatch(selectSizes(size));
+  };
+
+  return (
+    <>
+      {selected ? (
+        <div
+          onClick={select}
+          className="flex justify-center items-center p-4 py-2 border rounded border-[#0E1422] cursor-pointer"
+        >
+          <p className="font-medium text-xs text-[#0E1422]">{size}</p>
+        </div>
+      ) : (
+        <div
+          onClick={select}
+          className="flex justify-center items-center p-4 py-2 border rounded border-[#E6E7E8] cursor-pointer"
+        >
+          <p className="font-medium text-xs text-[#0E1422]">{size}</p>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -1,16 +1,38 @@
 import React from "react";
 
+// Hooks
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+// Actions
+import { selectCategories } from "../../Slices/categories.slice";
+
 type PropsType = {
   category: string;
 };
 
 const Category: React.FC<PropsType> = ({ category }) => {
+  const dispatch = useDispatch();
+
+  const [selected, setSelected] = useState(false);
+
+  const select = () => {
+    setSelected(!selected);
+
+    dispatch(selectCategories(category));
+  };
+
   return (
-    <div className="flex gap-1 items-center border-b py-1 cursor-pointer">
+    <div
+      onClick={select}
+      className="flex gap-1 items-center border-b py-1 cursor-pointer"
+    >
       <div>
         <input
           type="checkbox"
           className="w-3 h-3 text-black border-gray-300 rounded cursor-pointer"
+          checked={selected}
+          onChange={select}
         />
       </div>
       <div>
