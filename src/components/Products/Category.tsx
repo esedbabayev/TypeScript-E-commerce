@@ -1,6 +1,10 @@
 import React from "react";
 
-const Category: React.FC = () => {
+type PropsType = {
+  category: string;
+};
+
+const Category: React.FC<PropsType> = ({ category }) => {
   return (
     <div className="flex gap-1 items-center border-b py-1 cursor-pointer">
       <div>
@@ -10,7 +14,7 @@ const Category: React.FC = () => {
         />
       </div>
       <div>
-        <p className="text-[#474B57] text-base font-normal">Category</p>
+        <p className="text-[#474B57] text-base font-normal">{category}</p>
       </div>
     </div>
   );
