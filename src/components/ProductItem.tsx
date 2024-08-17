@@ -6,18 +6,16 @@ import { Link } from "react-router-dom";
 // Images
 // import BlackTshirt from "../images/image.png";
 
-type ProductType = {
-  id: string;
-  image: string;
-  name: string;
-  price: number;
-};
+interface ProductItemProps {
+  product: {
+    id: number;
+    name: string;
+    price: number;
+    image: string;
+  };
+}
 
-type PropsType = {
-  product: ProductType;
-};
-
-const ProductItem: React.FC<PropsType> = ({ product }) => {
+const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
   return (
     <div className="flex flex-col gap-3">
       {/* Product Image and Name */}

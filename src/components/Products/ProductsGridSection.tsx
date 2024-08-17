@@ -16,7 +16,7 @@ interface ProductType {
   id: number;
   name: string;
   price: number;
-  imageUrl: string;
+  image: string;
 }
 
 const ProductsGridSection: React.FC = () => {
