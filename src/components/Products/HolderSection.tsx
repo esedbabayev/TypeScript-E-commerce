@@ -1,16 +1,46 @@
-import React from "react";
-
-// Components
+import React, { useState, useEffect } from "react";
 import Container from "../Container.tsx";
 import LeftSidebarSection from "./LeftSidebarSection.tsx";
 import ProductsGridSection from "./ProductsGridSection.tsx";
 
+type FilterType = {
+  category: string[];
+  colors: string[];
+  sizes: string[];
+};
+
 const HolderSection: React.FC = () => {
+  const [filters, setFilters] = useState<FilterType | null>(null);
+
+  const getFilters = async () => {
+    const response = await fetch("http://localhost:3000/products");
+    const data = await response.json();
+
+    // Assume the API returns an object that includes categories, colors, and sizes
+    const extractedFilters: FilterType = {
+      category: [...new Set(data.map((item: any) => item.category))],
+      colors: [...new Set(data.map((item: any) => item.color))],
+      sizes: [...new Set(data.map((item: any) => item.size))], 
+    };
+
+    setFilters(extractedFilters);
+  };
+
+  useEffect(() => {
+    getFilters();
+  }, []);
+
   return (
     <section className="mt-14">
       <Container>
         <div className="flex gap-7">
-          <LeftSidebarSection />
+          {filters && (
+            <LeftSidebarSection
+              categories={filters.category}
+              colors={filters.colors}
+              sizes={filters.sizes}
+            />
+          )}
           <ProductsGridSection />
         </div>
       </Container>
