@@ -3,6 +3,9 @@ import React from "react";
 // Link
 import { Link } from "react-router-dom";
 
+// Hooks
+import { useSelector } from "react-redux";
+
 // Components
 import NavBar from "../Header/NavBar.tsx";
 import Container from "../Container.tsx";
@@ -24,6 +27,11 @@ const Header: React.FC = () => {
       localStorage.removeItem("userId");
     }
   };
+  const cartItems = useSelector((state) => state.cart.cartItems)?.map(
+    (cartItem) => {
+      return cartItem?.quantity;
+    }
+  );
 
   return (
     <header className="w-full py-5 px-12">
@@ -51,8 +59,18 @@ const Header: React.FC = () => {
                 />
               </div>
               <div className="flex gap-8">
-                <Link to="/cart">
+                <Link
+                  className="flex gap-2 items-center justify-center"
+                  to="/cart"
+                >
                   <Cart />
+                  {cartItems?.length > 0 && (
+                    <span className="w-5 h-5 text-center flex items-center justify-center bg-slate-700 rounded-full text-white">
+                      {cartItems.reduce(
+                        (sum: number, num: number) => sum + num
+                      )}
+                    </span>
+                  )}
                 </Link>
                 {userId ? (
                   <Link onClick={logOut} to="/sign-in">
