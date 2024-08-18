@@ -7,6 +7,9 @@ import { useDispatch } from "react-redux";
 // Actions
 import { removeFromCart, changeAmount } from "../../Slices/cart.slice.js";
 
+// Link
+import { Link } from "react-router-dom";
+
 // Icons
 import Minus from "../../icons/Minus.tsx";
 import Plus from "../../icons/Plus.tsx";
@@ -16,15 +19,17 @@ const CartItem: React.FC = ({ cartItem }) => {
 
   const increaseQuantity = () => {
     if (quantity < 10) {
-      setQuantity(+quantity + 1);
-      dispatch(changeAmount({ cartItem, quantity: +quantity }));
+      const newQuantity = quantity + 1;
+      setQuantity(newQuantity);
+      dispatch(changeAmount({ cartItem, newQuantity }));
     }
   };
 
   const decreaseQuantity = () => {
     if (quantity > 1) {
-      setQuantity(+quantity - 1);
-      dispatch(changeAmount({ cartItem, quantity: +quantity }));
+      const newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+      dispatch(changeAmount({ cartItem, newQuantity }));
     }
   };
 
@@ -40,12 +45,16 @@ const CartItem: React.FC = ({ cartItem }) => {
       <div className="flex items-center gap-4">
         {/* image */}
         <div>
-          <img src={cartItem?.product.image} alt="" className="w-20" />
+          <Link to={`/products/${cartItem.product.id}`}>
+            <img src={cartItem?.product.image} alt="" className="w-20" />
+          </Link>
         </div>
         {/* name color size */}
         <div className="flex flex-col gap-3">
           <span className="font-medium text-sm text-[#0E1422]">
-            {cartItem?.product.name}
+            <Link to={`/products/${cartItem.product.id}`}>
+              {cartItem?.product.name}
+            </Link>
           </span>
           <div className="flex items-center gap-1">
             <div className="flex items-center gap-1">
