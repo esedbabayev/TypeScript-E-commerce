@@ -7,11 +7,14 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const OrderSummary: React.FC = () => {
-  const cartItems = useSelector((state) => state.cart?.cartItems)
-    ?.map((item: any) => {
-      return item.quantity * item.product.price;
-    })
-    .reduce((sum, num) => sum + num);
+  const cartItems = useSelector((state: any) => state.cart.cartItems);
+
+  const subtotal = cartItems
+    .map((item: any) => item.quantity * item.product.price)
+    .reduce((sum: number, num: number) => sum + num, 0);
+
+  const shipping = 0;
+  const tax = (subtotal * 0.1).toFixed(2);
 
   return (
     <div className="w-3/12 h-[25rem] px-6 py-8 border border-[#E6E7E8] rounded-lg">
@@ -25,7 +28,9 @@ const OrderSummary: React.FC = () => {
       <div className="py-6 flex flex-col gap-4">
         <div className="flex justify-between">
           <span className="text-sm font-medium text-[#5C5F6A]">Subtotal</span>
-          <span className="text-sm font-medium text-[#0E1422]">$ 90.00</span>
+          <span className="text-sm font-medium text-[#0E1422]">
+            ${+subtotal.toFixed(2)}
+          </span>
         </div>
         <div className="flex justify-between">
           <span className="text-sm font-medium text-[#5C5F6A]">Shipping</span>
@@ -33,12 +38,12 @@ const OrderSummary: React.FC = () => {
         </div>
         <div className="flex justify-between">
           <span className="text-sm font-medium text-[#5C5F6A]">Tax</span>
-          <span className="text-sm font-medium text-[#0E1422]">$ 3.00</span>
+          <span className="text-sm font-medium text-[#0E1422]">${+tax}</span>
         </div>
         <div className="flex justify-between pt-4 border-t border-[#E6E7E8]">
           <span className="text-sm font-medium text-[#5C5F6A]">Total</span>
           <span className="text-sm font-medium text-[#0E1422]">
-            $ {cartItems}
+            ${+(subtotal + parseFloat(tax)).toFixed(2)}
           </span>
         </div>
       </div>
