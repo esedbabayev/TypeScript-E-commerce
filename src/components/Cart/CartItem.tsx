@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 // Actions
-import { removeFromCart } from "../../Slices/cart.slice.js";
+import { removeFromCart, changeAmount } from "../../Slices/cart.slice.js";
 
 // Icons
 import Minus from "../../icons/Minus.tsx";
@@ -16,22 +16,22 @@ const CartItem: React.FC = ({ cartItem }) => {
 
   const increaseQuantity = () => {
     if (quantity < 10) {
-      setQuantity(quantity + 1);
-      return;
+      setQuantity(+quantity + 1);
+      dispatch(changeAmount({ cartItem, quantity: +quantity }));
     }
   };
 
   const decreaseQuantity = () => {
     if (quantity > 1) {
-      setQuantity(quantity - 1);
-      return;
+      setQuantity(+quantity - 1);
+      dispatch(changeAmount({ cartItem, quantity: +quantity }));
     }
   };
 
   const dispatch = useDispatch();
 
-  const removeFromCart = ():any => {
-    dispatch(removeFromCart(cartItem))
+  const removeFromCartHandler = () => {
+    dispatch(removeFromCart(cartItem));
   };
 
   return (
@@ -76,7 +76,7 @@ const CartItem: React.FC = ({ cartItem }) => {
           </div>
         </div>
         <div
-          onClick={removeFromCart}
+          onClick={removeFromCartHandler}
           className="cursor-pointer p-3 rounded bg-[#F6F6F6]"
         >
           <span>&#10005;</span>
