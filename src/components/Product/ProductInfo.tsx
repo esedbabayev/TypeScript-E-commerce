@@ -2,6 +2,12 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+// UUID
+import { v4 as uuidv4 } from "uuid";
+
+// AXIOS
+import axios from "axios";
+
 // Actions
 import { addToCart } from "../../Slices/cart.slice.js";
 
@@ -25,6 +31,8 @@ type PropsType = {
 const ProductInfo: React.FC<PropsType> = ({ product }) => {
   const dispatch = useDispatch();
 
+  const userId = JSON.parse(localStorage.getItem("userId"));
+
   const [quantity, setQuantity] = useState<number>(1);
 
   const increaseQuantity = () => {
@@ -44,12 +52,12 @@ const ProductInfo: React.FC<PropsType> = ({ product }) => {
   const selectedColors = useSelector((state) => {
     return state.colors.selectedColors;
   });
-  
+
   const selectedSizes = useSelector((state) => {
     return state.sizes.selectedSizes;
   });
 
-  const addToCardHandler = () => {
+  const addToCardHandler = async () => {
     if (!selectedColors.length) {
       alert("Please choose color");
       return;
@@ -64,7 +72,14 @@ const ProductInfo: React.FC<PropsType> = ({ product }) => {
       quantity,
       size: selectedSizes[0],
       product,
+      id: uuidv4(),
+      userId,
     };
+
+    const { data } = await axios.post(
+      "http://localhost:3000/carts",
+      selectedProducts
+    );
 
     dispatch(addToCart(selectedProducts));
   };
