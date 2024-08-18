@@ -1,4 +1,9 @@
-import React from "react";
+// React & Hooks
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+// Actions
+import { addToCart } from "../../Slices/cart.slice.js";
 
 // Components
 import Color from "../Products/Color.tsx";
@@ -11,18 +16,65 @@ import Minus from "../../icons/Minus.tsx";
 import Plus from "../../icons/Plus.tsx";
 import Heart from "../../icons/Heart.tsx";
 
+import { ProductType } from "./ProductSection.tsx";
+
 type PropsType = {
-  name: string;
-  price: number;
+  product: ProductType;
 };
 
-const ProductInfo: React.FC<PropsType> = ({ name, price }) => {
+const ProductInfo: React.FC<PropsType> = ({ product }) => {
+  const dispatch = useDispatch();
+
+  const [quantity, setQuantiquantity] = useState<number>(1);
+
+  const increaseQuantiquantity = () => {
+    if (quantity < 10) {
+      setQuantiquantity(quantity + 1);
+      return;
+    }
+  };
+
+  const decreaseQuantiquantity = () => {
+    if (quantity > 1) {
+      setQuantiquantity(quantity - 1);
+      return;
+    }
+  };
+
+  const selectedColors = useSelector((state) => {
+    return state.colors.selectedColors;
+  });
+  
+  const selectedSizes = useSelector((state) => {
+    return state.sizes.selectedSizes;
+  });
+
+  const addToCardHandler = () => {
+    if (!selectedColors.length) {
+      alert("Please choose color");
+      return;
+    }
+
+    if (!selectedSizes.length) {
+      alert("Please choose size");
+      return;
+    }
+
+    const selectedProducts = {
+      quantity,
+      size: selectedSizes[0],
+      product,
+    };
+
+    dispatch(addToCart(selectedProducts));
+  };
+
   return (
     <div className="w-1/2 flex flex-col gap-6">
       {/* name and share */}
       <div className="w-full">
         <div className="flex justify-between">
-          <h3 className="font-bold text-3xl">{name}</h3>
+          <h3 className="font-bold text-3xl">{product.name}</h3>
           <div className="cursor-pointer">
             <Share />
           </div>
@@ -42,7 +94,7 @@ const ProductInfo: React.FC<PropsType> = ({ name, price }) => {
       </div>
       {/* price */}
       <div>
-        <p className="font-bold text-lg">${price?.toFixed(2)}</p>
+        <p className="font-bold text-lg">${product.price.toFixed(2)}</p>
       </div>
       {/* colors */}
       <div className="flex flex-col gap-2 w-1/3">
@@ -50,11 +102,8 @@ const ProductInfo: React.FC<PropsType> = ({ name, price }) => {
           Available Colors
         </p>
         <div className="grid grid-cols-5 max-h-16">
-          <Color />
-          <Color />
-          <Color />
-          <Color />
-          <Color />
+          <Color color={product.color} />
+          {/* Repeat <Color /> as needed */}
         </div>
       </div>
       {/* size */}
@@ -63,22 +112,18 @@ const ProductInfo: React.FC<PropsType> = ({ name, price }) => {
           Select Size
         </p>
         <div className="grid grid-cols-5 gap-3">
-          <Size />
-          <Size />
-          <Size />
-          <Size />
-          <Size />
+          <Size size={product.size} />
         </div>
       </div>
       {/* quantity */}
       <div className="w-1/3 flex flex-col gap-2">
-        <p className="uppercase font-medium text-xs text-[#5C5F6A]">quantity</p>
+        <p className="uppercase font-medium text-xs text-[#5C5F6A]">Quantity</p>
         <div className="px-4 py-3 border rounded flex gap-14 justify-center items-center">
-          <div className="cursor-pointer">
+          <div onClick={decreaseQuantiquantity} className="cursor-pointer">
             <Minus />
           </div>
-          <span>1</span>
-          <div className="cursor-pointer">
+          <span>{quantity}</span>
+          <div onClick={increaseQuantiquantity} className="cursor-pointer">
             <Plus />
           </div>
         </div>
@@ -86,7 +131,10 @@ const ProductInfo: React.FC<PropsType> = ({ name, price }) => {
       {/* add to cart */}
       <div className="w-8/12">
         <div className="w-full flex gap-3">
-          <button className="w-full flex gap-3 justify-center items-center px-6 py-2 bg-black text-white rounded-md border-2 border-transparent transition-all duration-200 hover:bg-[#F6F6F6] hover:text-black hover:border-black">
+          <button
+            onClick={addToCardHandler}
+            className="w-full flex gap-3 justify-center items-center px-6 py-2 bg-black text-white rounded-md border-2 border-transparent transition-all duration-200 hover:bg-[#F6F6F6] hover:text-black hover:border-black"
+          >
             <span className="text-center">Add to cart</span>
           </button>
           <div className="cursor-pointer px-6 py-2 rounded-md border-2 flex justify-center items-center">

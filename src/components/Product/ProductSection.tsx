@@ -1,20 +1,18 @@
 import React from "react";
-
-// Hooks
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-
-// Components
 import Container from "../Container.tsx";
 import ProductImage from "./ProductImage.tsx";
 import ProductInfo from "./ProductInfo.tsx";
-import ProductsGridSection from "../Products/ProductsGridSection";
 
-type ProductType = {
+export type ProductType = {
   id: string;
   image: string;
   name: string;
   price: number;
+  size: string;
+  category: string;
+  color: string;
 };
 
 const ProductSection: React.FC = () => {
@@ -35,11 +33,14 @@ const ProductSection: React.FC = () => {
   return (
     <section className="mt-4">
       <Container>
-        <div className="w-full flex gap-8">
-            <ProductImage image={productData?.image} />
-
-          <ProductInfo name={productData?.name} price={productData?.price}/>
-        </div>
+        {productData ? (
+          <div className="w-full flex gap-8">
+            <ProductImage image={productData.image} />
+            <ProductInfo product={productData} />
+          </div>
+        ) : (
+          <p>Loading product data...</p>
+        )}
       </Container>
     </section>
   );
