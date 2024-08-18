@@ -24,21 +24,14 @@ const Size: React.FC<SizeProps> = ({ size }) => {
 
   return (
     <>
-      {selected ? (
-        <div
-          onClick={select}
-          className="flex justify-center items-center p-4 py-2 border rounded border-[#0E1422] cursor-pointer"
-        >
-          <p className="font-medium text-xs text-[#0E1422]">{size}</p>
-        </div>
-      ) : (
-        <div
-          onClick={select}
-          className="flex justify-center items-center p-4 py-2 border rounded border-[#E6E7E8] cursor-pointer"
-        >
-          <p className="font-medium text-xs text-[#0E1422]">{size}</p>
-        </div>
-      )}
+      <div
+        onClick={select}
+        className={`flex justify-center items-center p-4 py-2 border rounded ${
+          selected ? "border-[#0E1422]" : "border-[#E6E7E8]"
+        } cursor-pointer`}
+      >
+        <p className="font-medium text-xs text-[#0E1422]">{size}</p>
+      </div>
     </>
   );
 };
