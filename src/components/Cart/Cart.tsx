@@ -3,7 +3,7 @@ import React from "react";
 // Components
 import CartItem from "./CartItem.tsx";
 
-const Cart: React.FC = () => {
+const Cart: React.FC = ({ cartItems }) => {
   return (
     <div className="w-3/5 flex flex-col gap-12">
       <div className="py-5 border-b">
@@ -11,8 +11,9 @@ const Cart: React.FC = () => {
       </div>
       {/* cart item */}
       <div className="flex flex-col gap-10">
-        <CartItem />
-        <CartItem />
+        {cartItems?.map((cartItem) => (
+          <CartItem cartItem={cartItem} />
+        ))}
       </div>
     </div>
   );

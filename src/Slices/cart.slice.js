@@ -20,7 +20,10 @@ const cartSlice = createSlice({
         state.cartItems.push(cartItem);
       }
     },
-    removeFromCart: (state, action) => {},
+    removeFromCart: (state, action) => {
+      const cartItem = action.payload;
+      
+    },
     increaseAmount: (state, action) => {},
     decreaseAmount: (state, action) => {},
   },

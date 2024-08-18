@@ -27,7 +27,7 @@ const Header: React.FC = () => {
       localStorage.removeItem("userId");
     }
   };
-  const cartItems = useSelector((state) => state.cart.cartItems)?.map(
+  const cartItems = useSelector((state) => state.cart?.cartItems)?.map(
     (cartItem) => {
       return cartItem?.quantity;
     }
@@ -66,7 +66,7 @@ const Header: React.FC = () => {
                   <Cart />
                   {cartItems?.length > 0 && (
                     <span className="w-5 h-5 text-center flex items-center justify-center bg-slate-700 rounded-full text-white">
-                      {cartItems.reduce(
+                      {cartItems?.reduce(
                         (sum: number, num: number) => sum + num
                       )}
                     </span>

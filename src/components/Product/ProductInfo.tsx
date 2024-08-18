@@ -25,18 +25,18 @@ type PropsType = {
 const ProductInfo: React.FC<PropsType> = ({ product }) => {
   const dispatch = useDispatch();
 
-  const [quantity, setQuantiquantity] = useState<number>(1);
+  const [quantity, setQuantity] = useState<number>(1);
 
-  const increaseQuantiquantity = () => {
+  const increaseQuantity = () => {
     if (quantity < 10) {
-      setQuantiquantity(quantity + 1);
+      setQuantity(quantity + 1);
       return;
     }
   };
 
-  const decreaseQuantiquantity = () => {
+  const decreaseQuantity = () => {
     if (quantity > 1) {
-      setQuantiquantity(quantity - 1);
+      setQuantity(quantity - 1);
       return;
     }
   };
@@ -119,11 +119,11 @@ const ProductInfo: React.FC<PropsType> = ({ product }) => {
       <div className="w-1/3 flex flex-col gap-2">
         <p className="uppercase font-medium text-xs text-[#5C5F6A]">Quantity</p>
         <div className="px-4 py-3 border rounded flex gap-14 justify-center items-center">
-          <div onClick={decreaseQuantiquantity} className="cursor-pointer">
+          <div onClick={decreaseQuantity} className="cursor-pointer">
             <Minus />
           </div>
           <span>{quantity}</span>
-          <div onClick={increaseQuantiquantity} className="cursor-pointer">
+          <div onClick={increaseQuantity} className="cursor-pointer">
             <Plus />
           </div>
         </div>

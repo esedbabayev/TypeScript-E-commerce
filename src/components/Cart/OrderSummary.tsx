@@ -1,12 +1,18 @@
 import React from "react";
 
+// Hooks
+import { useSelector } from "react-redux";
+
 // Link
 import { Link } from "react-router-dom";
 
-// Components
-import Button from "../Button.tsx";
-
 const OrderSummary: React.FC = () => {
+  const cartItems = useSelector((state) => state.cart?.cartItems)
+    ?.map((item: any) => {
+      return item.quantity * item.product.price;
+    })
+    .reduce((sum, num) => sum + num);
+
   return (
     <div className="w-3/12 h-[25rem] px-6 py-8 border border-[#E6E7E8] rounded-lg">
       {/* text */}
@@ -31,7 +37,9 @@ const OrderSummary: React.FC = () => {
         </div>
         <div className="flex justify-between pt-4 border-t border-[#E6E7E8]">
           <span className="text-sm font-medium text-[#5C5F6A]">Total</span>
-          <span className="text-sm font-medium text-[#0E1422]">$ 100.00</span>
+          <span className="text-sm font-medium text-[#0E1422]">
+            $ {cartItems}
+          </span>
         </div>
       </div>
       {/* button */}
